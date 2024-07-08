@@ -1,0 +1,8 @@
+<main class="main">
+  <app-toasts-container aria-live="polite" aria-atomic="true" />
+  <app-http-response-error-message></app-http-response-error-message>
+  <div class="content">
+    <app-search-employee [hidden]="!showMaster"></app-search-employee>
+    <app-edit-employee [hidden]="showMaster"></app-edit-employee>
+  </div>
+</main>

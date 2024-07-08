@@ -1,0 +1,117 @@
+<div class="mt-3 m-lg-5 mb-3">
+  <div class="card text-bg-light">
+    <div class="card-header">
+      <h4 class="mt-2">Employee Search Filter</h4>
+    </div>
+
+    <form>
+      <div class="card-body">
+        <div class="mb-2 row">
+          <label class="col-lg-2 form-label">Search Term</label>
+          <div class="col-sm">
+            <input type="text" class="form-control" #searchTerm>
+          </div>
+        </div>
+
+        <div class="mb-2 row">
+          <label for="job" class="col-lg-2 form-label">Job</label>
+          <div class="col-sm">
+            <select class="form-select" id="job" #selectedJob>
+              <option value=""></option>
+              @for (jobs of comboTO?.oCJobs; track jobs) {
+                <option [value]="jobs.id">
+                  {{ jobs.description }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-2 row">
+          <label for="manager" class="col-lg-2 form-label">Manager</label>
+          <div class="col-sm">
+            <select class="form-select" id="manager" #selectedManager>
+              <option value=""></option>
+              @for (manager of comboTO?.oCManagers; track manager) {
+                <option [value]="manager.id">
+                  {{ manager.description }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-2 row">
+          <label for="department" class="col-lg-2 form-label">Department</label>
+          <div class="col-sm">
+            <select class="form-select" id="department" #selectedDepartment>
+              <option value=""></option>
+              @for (department of comboTO?.oCDepartments; track department) {
+                <option [value]="department.id">
+                  {{ department.description }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-2 row">
+          <label for="location" class="col-lg-2 form-label">Location</label>
+          <div class="col-sm">
+            <select class="form-select" id="location" #selectedLocation>
+              <option value=""></option>
+              @for (location of comboTO?.oCLocations; track location) {
+                <option [value]="location.id">
+                  {{ location.description }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-2 row">
+          <label for="country" class="col-lg-2 form-label">Country</label>
+          <div class="col-sm">
+            <select class="form-select" id="country" #selectedCountry>
+              <option value=""></option>
+              @for (country of comboTO?.oCCountries; track country) {
+                <option [value]="country.id">
+                  {{ country.description }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-2 row">
+          <label for="region" class="col-lg-2 form-label">Region</label>
+          <div class="col-sm">
+            <select class="form-select" id="region" #selectedRegion>
+              <option value=""></option>
+              @for (region of comboTO?.oCRegions; track region) {
+                <option [value]="region.id">
+                  {{ region.description }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <div class="d-flex justify-content-lg-end mb-2 mt-2">
+          <button type="reset" class="btn btn-warning">Clear Filter</button>
+          <div class="p-1"></div>
+          <button type="button" class="btn btn-primary"
+                  (click)="search(searchTerm.value, selectedJob.value, selectedManager.value, selectedDepartment.value, selectedLocation.value, selectedCountry.value, selectedRegion.value)">
+            Search
+          </button>
+          <div class="p-1"></div>
+          <button type="button" class="btn btn-success" (click)="addNewEmployee()">Add New Employee</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-list-employee></app-list-employee>

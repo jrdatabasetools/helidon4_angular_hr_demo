@@ -1,0 +1,44 @@
+<div class="mt-3 m-lg-5 mb-3">
+  <div class="card text-bg-light">
+
+    <div class="card-header">
+      <h4 class="mt-2">Employee Search Results</h4>
+    </div>
+
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Employee ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Job Title</th>
+          <th scope="col">Manager</th>
+          <th scope="col">Department</th>
+          <th scope="col">City</th>
+          <th scope="col">Country</th>
+          <th scope="col">Region</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (employee of listEmployeeData; track employee.employeeId; let i = $index) {
+            <tr (click)="openEmployee(employee.employeeId)" [style.cursor]="cursorType" (mouseover)="changeCursor('pointer')"
+                (mouseout)="changeCursor('default')">
+              <td>{{ employee.employeeId }}</td>
+              <td>{{ employee.firstName }}</td>
+              <td>{{ employee.lastName }}</td>
+              <td>{{ employee.email }}</td>
+              <td>{{ employee.jobTitle }}</td>
+              <td>{{ employee.managerFullname }}</td>
+              <td>{{ employee.departmentName }}</td>
+              <td>{{ employee.city }}</td>
+              <td>{{ employee.countryName }}</td>
+              <td>{{ employee.regionName }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

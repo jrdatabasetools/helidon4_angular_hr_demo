@@ -1,0 +1,178 @@
+<form #employeeForm="ngForm">
+    <div class="mt-3 m-lg-5 mb-3">
+        <div class="card text-bg-light">
+
+            <div class="card-header">
+                <h4 class="mt-2">Create/Modify Employee</h4> (No Field Validation on Edit Fields - Unallowed Field
+                Values will
+                result in Oracle DB Errors to demonstrate Database Errors)
+            </div>
+
+            <div class="card-body">
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">Employee Id</label>
+                    <div class="col-sm-2">
+                        <input [(ngModel)]="employeeIdValue" [ngModelOptions]="{standalone: true}" class="form-control" disabled="true"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">First Name</label>
+                    <div class="col-sm-3">
+                        <input [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}" class="form-control"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">Last Name</label>
+                    <div class="col-sm-3">
+                        <input [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}" class="form-control"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">Email</label>
+                    <div class="col-sm-5">
+                        <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">Phone Number</label>
+                    <div class="col-sm-3">
+                        <input [(ngModel)]="phoneNumber" [ngModelOptions]="{standalone: true}" class="form-control"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">Hire Date</label>
+
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input
+                                    #dp="ngbDatepicker"
+                                    [(ngModel)]="hireDateModel"
+                                    [ngModelOptions]="{standalone: true}"
+                                    class="form-control"
+                                    name="dp"
+                                    ngbDatepicker placeholder="yyyy-mm-dd"
+                            />
+                            <button (click)="dp.toggle()" class="btn btn-outline-secondary bi bi-calendar3"
+                                    type="button"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">Salary</label>
+                    <div class="col-sm-2">
+                        <input [(ngModel)]="salary" [ngModelOptions]="{standalone: true}" class="form-control"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label">Commission PCT</label>
+                    <div class="col-sm-1">
+                        <input [(ngModel)]="commissionPct" [ngModelOptions]="{standalone: true}" class="form-control"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label" for="job">Job</label>
+                    <div class="col-sm">
+                        <select [(ngModel)]="jobId" [ngModelOptions]="{standalone: true}" class="form-select" id="job">
+                            <option value=""></option>
+                            @for (jobs of jobs; track jobs) {
+                                <option [value]="jobs.jobId">
+                                    {{ jobs.jobDesc }}
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label" for="manager">Manager</label>
+                    <div class="col-sm">
+                        <select [(ngModel)]="managerId" [ngModelOptions]="{standalone: true}" class="form-select"
+                                id="manager">
+                            <option value=""></option>
+                            @for (manager of managers; track managers) {
+                                <option [value]="manager.managerId">
+                                    {{ manager.managerFullDesc }}
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-2 row">
+                    <label class="col-lg-2 form-label" for="department">Department</label>
+                    <div class="col-sm">
+                        <select [(ngModel)]="departmentId" [ngModelOptions]="{standalone: true}" class="form-select"
+                                id="department">
+                            <option value=""></option>
+                            @for (department of departments; track departments) {
+                                <option [value]="department.departmentId">
+                                    {{ department.departmentDesc }}
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="d-flex justify-content-lg-end mb-2 mt-2">
+                    <button (click)="back()" class="btn btn-warning" type="button">Back</button>
+                    <div class="p-1"></div>
+                    <button (click)="saveEmployee()" class="btn btn-success" type="button">Save</button>
+                    <div class="p-1"></div>
+                    <button (click)="deleteEmployee()" [disabled]="!employeeIdValue" class="btn btn-danger"
+                            type="button">Delete
+                        Employee
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="mt-3 m-lg-5 mb-3">
+    <div class="card text-bg-light">
+
+        <div class="card-header">
+            <h4 class="mt-2">Employee History</h4>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Job Title</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @for (history of jobHistory; track history.startDate; let i = $index) {
+                        <tr>
+                            <td>{{ history.startDate }}</td>
+                            <td>{{ history.endDate }}</td>
+                            <td>{{ history.departmentName }}</td>
+                            <td>{{ history.jobTitle }}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
