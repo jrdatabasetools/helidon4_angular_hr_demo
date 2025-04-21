@@ -6,18 +6,18 @@
   <parent>
     <groupId>io.helidon.applications</groupId>
     <artifactId>helidon-mp</artifactId>
-    <version>4.0.10</version>
+    <version>4.1.6</version>
   </parent>
 
   <groupId>com.jr-database-tools.hr_demo</groupId>
   <artifactId>helidon4_angular</artifactId>
-  <version>2.5.39</version>
+  <version>25.1.0</version>
 
   <properties>
-    <com.vaadin.open.version>8.5.0.1</com.vaadin.open.version>
-    <com.github.eirslett.frontend-maven-plugin.version>1.15.0</com.github.eirslett.frontend-maven-plugin.version>
-    <nodeVersion>v20.11.1</nodeVersion>
-    <npmVersion>10.2.4</npmVersion>
+    <com.vaadin.open.version>8.5.0.4</com.vaadin.open.version>
+    <com.github.eirslett.frontend-maven-plugin.version>1.15.1</com.github.eirslett.frontend-maven-plugin.version>
+    <nodeVersion>v22.13.1</nodeVersion>
+    <npmVersion>10.9.2</npmVersion>
   </properties>
 
   <dependencies>
@@ -25,14 +25,18 @@
       <groupId>io.helidon.microprofile.bundles</groupId>
       <artifactId>helidon-microprofile-core</artifactId>
     </dependency>
+<!--
     <dependency>
       <groupId>io.helidon.microprofile.openapi</groupId>
       <artifactId>helidon-microprofile-openapi</artifactId>
     </dependency>
+-->
+<!--
     <dependency>
       <groupId>io.helidon.microprofile.health</groupId>
       <artifactId>helidon-microprofile-health</artifactId>
     </dependency>
+-->
     <dependency>
       <groupId>jakarta.json.bind</groupId>
       <artifactId>jakarta.json.bind-api</artifactId>
@@ -47,11 +51,14 @@
       <artifactId>helidon-logging-jul</artifactId>
       <scope>runtime</scope>
     </dependency>
+<!--
     <dependency>
       <groupId>io.smallrye</groupId>
       <artifactId>jandex</artifactId>
       <scope>runtime</scope>
     </dependency>
+-->
+<!--
     <dependency>
       <groupId>jakarta.activation</groupId>
       <artifactId>jakarta.activation-api</artifactId>
@@ -64,11 +71,13 @@
       <groupId>io.helidon.microprofile.metrics</groupId>
       <artifactId>helidon-microprofile-metrics</artifactId>
     </dependency>
+-->
+<!--
     <dependency>
       <groupId>io.helidon.webserver</groupId>
       <artifactId>helidon-webserver</artifactId>
     </dependency>
-
+-->
     <!-- tests -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -91,6 +100,44 @@
       <groupId>io.helidon.integrations.cdi</groupId>
       <artifactId>helidon-integrations-cdi-datasource-ucp</artifactId>
       <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.oracle.database.jdbc</groupId>
+          <artifactId>ucp</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.jdbc</groupId>
+          <artifactId>rsi</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.xml</groupId>
+          <artifactId>xdb</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.xml</groupId>
+          <artifactId>xmlparserv2_sans_jaxp_services</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.ha</groupId>
+          <artifactId>simplefan</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.ha</groupId>
+          <artifactId>ons</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.security</groupId>
+          <artifactId>oraclepki</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.security</groupId>
+          <artifactId>osdt_core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.security</groupId>
+          <artifactId>osdt_cert</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- oracle jdbc driver -->
@@ -99,14 +146,42 @@
       <artifactId>ojdbc11</artifactId>
       <exclusions>
         <exclusion>
-          <groupId>com.oracle.jdbc</groupId>
-          <artifactId>xmlparserv2</artifactId>
+          <groupId>com.oracle.database.jdbc</groupId>
+          <artifactId>ucp</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.jdbc</groupId>
+          <artifactId>rsi</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.xml</groupId>
+          <artifactId>xdb</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.xml</groupId>
+          <artifactId>xmlparserv2_sans_jaxp_services</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.ha</groupId>
+          <artifactId>simplefan</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.ha</groupId>
+          <artifactId>ons</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.security</groupId>
+          <artifactId>oraclepki</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.security</groupId>
+          <artifactId>osdt_core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.oracle.database.security</groupId>
+          <artifactId>osdt_cert</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.oracle.database.jdbc</groupId>
-      <artifactId>ucp11</artifactId>
     </dependency>
 
     <!-- autostart default browser url http://localhost:8080 -->
@@ -128,6 +203,7 @@
           </execution>
         </executions>
       </plugin>
+      
       <plugin>
         <groupId>io.smallrye</groupId>
         <artifactId>jandex-maven-plugin</artifactId>
@@ -137,9 +213,11 @@
           </execution>
         </executions>
       </plugin>
+      
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.0</version>
         <executions>
           <execution>
             <id>add-source</id>
@@ -156,13 +234,15 @@
           </execution>
         </executions>
       </plugin>
+      
       <plugin>
         <groupId>com.jr-database-tools.dbworkbench</groupId>
         <artifactId>connectorbuilder-maven-plugin</artifactId>
-        <version>2.5.39</version>
+        <version>25.1.0</version>
         <configuration>
-          <connectorBuilderName>hr_demo_micro_profile_angular</connectorBuilderName>
-          <info>all</info>
+          <connector_builder_filename>hr_demo_micro_profile_angular.mp_bldr</connector_builder_filename>
+          <build_target>all</build_target>
+          <info>warning</info>
         </configuration>
         <executions>
           <execution>
